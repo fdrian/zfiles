@@ -7,6 +7,7 @@ echo "${YELLOW}[+] Running $0...${RESET}"
 
 # Check system version
 if [[ $ID == "arch" || $ID_LIKE == *"arch"* ]]; then
+    pacman -Syu
     if command -v yay &>/dev/null; then 
         while read -r package; do    
             yay -S --noconfirm --needed  $package || echo "${RED}$(date) -  Error installing $package${RESET}" >> $LOG_FILE
@@ -15,6 +16,7 @@ if [[ $ID == "arch" || $ID_LIKE == *"arch"* ]]; then
         echo "${RED}yay is not installed. Please install yay first.${RESET}"
     fi
 elif [[ $ID == "ubuntu" || $ID_LIKE == *"debian"* ]]; then
+    apt update
     while read -r package; do    
         apt install -y $package || echo "${RED}$(date) -  Error installing $package${RESET}" >> $LOG_FILE
     done < "$PACKAGE_LIST"    
