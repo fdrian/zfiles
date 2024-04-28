@@ -14,7 +14,7 @@ Banner(){
 }
 
 # Constants
-LOG_FILE="install_errors.log"
+LOG_FILE="errors.log"
 DEBUG_STD="&>/dev/null"
 DEBUG_ERROR="2>/dev/null"
 source /etc/os-release
