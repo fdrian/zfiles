@@ -1,5 +1,5 @@
 #!/bin/bash
-# Essential packages
+# essential.sh
 
 PACKAGE_LIST="setup/packages/essential.txt" 
 
@@ -7,10 +7,10 @@ echo "${YELLOW}[+] Running $0...${RESET}"
 
 # Check system version
 if [[ $ID == "arch" || $ID_LIKE == *"arch"* ]]; then
-    pacman -Syu
+    sudo pacman -Syu
     if command -v yay &>/dev/null; then 
         while read -r package; do    
-            yay -S --noconfirm --needed  $package || echo "${RED}$(date) -  Error installing $package${RESET}" >> $LOG_FILE
+            yay -S --noconfirm --needed  $package 2>> $LOG_FILE
         done < "$PACKAGE_LIST"
     else
         echo "${RED}yay is not installed. Please install yay first.${RESET}"
@@ -18,7 +18,7 @@ if [[ $ID == "arch" || $ID_LIKE == *"arch"* ]]; then
 elif [[ $ID == "ubuntu" || $ID_LIKE == *"debian"* ]]; then
     apt update
     while read -r package; do    
-        apt-get install $package -y || echo "${RED}$(date) -  Error installing $package${RESET}" >> $LOG_FILE
+        sudo apt install -y $package 2>> $LOG_FILE
     done < "$PACKAGE_LIST"    
 else
     echo "${RED}Distribution not supported for automatic package installation!${RESET}"
