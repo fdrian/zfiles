@@ -8,7 +8,7 @@ install_tool() {
   local repo="$2"
   echo "Installing $tool"
   sleep 1
-  go install $repo@latest
+  go install $repo@latest | pv
 }
 
 TOOLS_LIST="setup/packages/tools.txt" 
