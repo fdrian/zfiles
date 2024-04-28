@@ -1,0 +1,7 @@
+build-essential
+git
+curl
+wget
+zip
+jq
+pv
