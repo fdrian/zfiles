@@ -30,19 +30,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# Check system version
-if [[ $ID == "arch" || $ID_LIKE == *"arch"* ]]; then
-    if command -v yay &> /dev/null; then 
-        export PACKAGE_INSTALL="yay -S --noconfirm --needed "
-    else
-        echo "${RED}yay is not installed. Please install yay first.${RESET}"
-    fi
-elif [[ $ID == "ubuntu" || $ID_LIKE == "debian" ]]; then        
-    export PACKAGE_INSTALL="apt install -y "
-else
-    echo "Distribution not supported for automatic package installation."
-fi
-
 clear
 Banner
 
