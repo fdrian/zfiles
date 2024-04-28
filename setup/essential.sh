@@ -3,7 +3,7 @@
 
 PACKAGE_LIST="setup/packages/essential.txt" 
 
-echo "${BLUE} Running $0...${RESET}"
+echo "${YELLOW}[+] Running $0...${RESET}"
 
 # Check system version
 if [[ $ID == "arch" || $ID_LIKE == *"arch"* ]]; then

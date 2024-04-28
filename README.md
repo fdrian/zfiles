@@ -14,5 +14,5 @@ sudo apt update || sudo pacman -Syu
 ```
 
 ```bash
-bash install.sh
+source install.sh
 ```

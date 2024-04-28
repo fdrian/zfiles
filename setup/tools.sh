@@ -1,5 +1,6 @@
 #!/bin/bash
 #  Hacking Tools
+
 echo "${YELLOW}[+] Running $0...${RESET}"
 
 install_tool() {

@@ -1,5 +1,6 @@
 #!/bin/bash
 # Drian
+
 echo "${YELLOW}[+] Running $0...${RESET}"
 
 Banner(){
