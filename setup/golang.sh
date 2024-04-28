@@ -9,6 +9,8 @@ install_go(){
     echo "${RED}Go is not installed. Proceeding with installation...${RESET}"
     local GO_VERSION=$(curl -L -s "https://golang.org/VERSION?m=text" | head -n 1)
     wget -q  --show-progress "https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz" 
+
+    echo "${BLUE}Extracting files${RESET}"
     sudo tar -C /usr/local -xzf ${GO_VERSION}.linux-amd64.tar.gz | pv
     rm -rf $GO_VERSION*
 

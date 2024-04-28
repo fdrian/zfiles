@@ -17,6 +17,7 @@ Banner(){
 LOG_FILE="install_errors.log"
 DEBUG_STD="&>/dev/null"
 DEBUG_ERROR="2>/dev/null"
+source /etc/os-release
 
 # Colors
 RED=`tput setaf 1`
