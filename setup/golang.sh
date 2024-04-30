@@ -19,16 +19,19 @@ install_go(){
     time 1
 
     if ! echo $PATH | grep -q "/usr/local/go/bin" ; then 
-            # Setting Variables
-            export GOPATH="/usr/local/go"
-            export GOBIN="/usr/local/go/bin"
-            export PATH=$PATH:$GOBIN
+
+        # Create .local/go directory
+        mkdir -p ~/.local/go
+        # Setting Variables
+        export GOPATH="$HOME/.local/go"
+        export GOBIN="$HOME/.local/go/bin"
+        export PATH=$PATH:$GOBIN
 
         # checks if the Go bin directory  (/usr/local/go/bin)  is in your PATH
         if ! echo $PATH | grep -q "/usr/local/go/bin" ; then
             echo "# Added automatically - zfiles by @fdrian" >> $HOME/.zshrc    
-            echo "export GOPATH=/usr/local/go" >> $HOME/.zshrc
-            echo "export GOBIN=/usr/local/go/bin" >> $HOME/.zshrc        
+            echo "export GOPATH=$HOME/.local/go" >> $HOME/.zshrc
+            echo "export GOBIN=$HOME/.local/go/bin" >> $HOME/.zshrc        
             echo "export PATH=$PATH:$GOBIN" >> $HOME/.zshrc
         fi
         

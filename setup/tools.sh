@@ -11,7 +11,7 @@ install_tool() {
   go install $repo@latest | pv
 }
 
-TOOLS_LIST="setup/packages/tools.txt" 
+TOOLS_LIST="$ZFILES/setup/packages/tools.txt" 
 
 
 while read -r tool repo; do    
