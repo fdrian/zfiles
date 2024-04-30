@@ -1,3 +1,4 @@
+nuclei github.com/projectdiscovery/nuclei/v2/cmd/nuclei
 fff github.com/tomnomnom/fff
 hakrawler github.com/hakluke/hakrawler
 tojson github.com/tomnomnom/hacks/tojson
@@ -18,7 +19,6 @@ ffuf github.com/ffuf/ffuf
 assetfinder github.com/tomnomnom/assetfinder
 github-subdomains github.com/gwen001/github-subdomains
 waybackurls github.com/tomnomnom/hacks/waybackurls
-nuclei github.com/projectdiscovery/nuclei/v2/cmd/nuclei
 anew github.com/tomnomnom/anew
 notify github.com/projectdiscovery/notify/cmd/notify
 mildew github.com/daehee/mildew/cmd/mildew
