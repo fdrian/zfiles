@@ -21,11 +21,10 @@ install_go(){
     if ! echo $PATH | grep -q "/usr/local/go/bin" ; then 
         echo "Added automatically - zfiles by @fdrian" >> $HOME/.zshrc    
         echo "export GOPATH=/usr/local/go" >> $HOME/.zshrc
-        echo "export GOBIN=/usr/local/go/bin" >> $HOME/.zshrc
-        source ~/.zshrc
+        echo "export GOBIN=/usr/local/go/bin" >> $HOME/.zshrc        
         echo "export PATH=$PATH:$GOBIN" >> $HOME/.zshrc
     fi
-    source $HOME/.zshrc 
+    
 
 }
 
