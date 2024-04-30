@@ -41,6 +41,7 @@ install_go(){
             echo "export GOPATH=$HOME/.local/go" >> $HOME/.zshrc
             echo "export GOBIN=$HOME/.local/go/bin" >> $HOME/.zshrc        
             echo "export PATH=$GOBIN:$PATH" >> $HOME/.zshrc
+            echo "export PATH=$PATH:/usr/local/go/bin" >> $HOME/.zshrc
         fi
         
     fi
