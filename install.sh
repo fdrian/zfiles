@@ -41,6 +41,9 @@ source setup/essential.sh
 # install GoLang
 source setup/golang.sh
 
+# Adjust settings
+source setup/settings.sh
+
 # Install tools
 source setup/tools.sh
 
