@@ -6,3 +6,4 @@ zip
 jq
 pv
 htop
+libpcap-dev

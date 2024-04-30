@@ -14,9 +14,16 @@ install_go(){
     sudo tar -C /usr/local -xzf ${GO_VERSION}.linux-amd64.tar.gz | pv
     rm -rf $GO_VERSION*
 
+    # Add variaables
+    echo "${BLUE}Setting Go variables...${RESET}"
+    time 1
+
     if ! echo $PATH | grep -q "/usr/local/go/bin" ; then 
-        echo "Added automatically - zfiles by Drian"
-        echo "export PATH=\$PATH:/usr/local/go/bin" >> $HOME/.zshrc
+        echo "Added automatically - zfiles by @fdrian" >> $HOME/.zshrc    
+        echo "export GOPATH=/usr/local/go" >> $HOME/.zshrc
+        echo "export GOBIN=/usr/local/go/bin" >> $HOME/.zshrc
+        source ~/.zshrc
+        echo "export PATH=$PATH:$GOBIN" >> $HOME/.zshrc
     fi
     source $HOME/.zshrc 
 
