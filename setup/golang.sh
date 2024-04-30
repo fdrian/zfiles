@@ -6,23 +6,32 @@ echo "${YELLOW}[+] Running $0...${RESET}"
 sleep 1
 
 install_go(){
-    echo "${RED}Go is not installed. Proceeding with installation...${RESET}"
+    
     local GO_VERSION=$(curl -L -s "https://golang.org/VERSION?m=text" | head -n 1)
     wget -q  --show-progress "https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz" 
 
-    echo "${BLUE}Extracting files${RESET}"
+    echo "${BLUE}[+] Extracting files${RESET}"
     sudo tar -C /usr/local -xzf ${GO_VERSION}.linux-amd64.tar.gz | pv
     rm -rf $GO_VERSION*
 
-    # Add variaables
+    # Add variables
     echo "${BLUE}Setting Go variables...${RESET}"
     time 1
 
     if ! echo $PATH | grep -q "/usr/local/go/bin" ; then 
-        echo "# Added automatically - zfiles by @fdrian" >> $HOME/.zshrc    
-        echo "export GOPATH=/usr/local/go" >> $HOME/.zshrc
-        echo "export GOBIN=/usr/local/go/bin" >> $HOME/.zshrc        
-        echo "export PATH=$PATH:$GOBIN" >> $HOME/.zshrc
+            # Setting Variables
+            export GOPATH="/usr/local/go"
+            export GOBIN="/usr/local/go/bin"
+            export PATH=$PATH:$GOBIN
+
+        # checks if the Go bin directory  (/usr/local/go/bin)  is in your PATH
+        if ! echo $PATH | grep -q "/usr/local/go/bin" ; then
+            echo "# Added automatically - zfiles by @fdrian" >> $HOME/.zshrc    
+            echo "export GOPATH=/usr/local/go" >> $HOME/.zshrc
+            echo "export GOBIN=/usr/local/go/bin" >> $HOME/.zshrc        
+            echo "export PATH=$PATH:$GOBIN" >> $HOME/.zshrc
+        fi
+        
     fi
     
 
@@ -50,6 +59,7 @@ if command -v go &>/dev/null; then
         echo "${RED}Check manually!${RESET}"
     fi 
 else
+    echo "${RED}[!] Go is not installed. Proceeding with installation...${RESET}"
     install_go
 fi
 
