@@ -14,6 +14,7 @@ Banner(){
 }
 
 # Constants
+export ZFILES=$PWD
 LOG_FILE="errors.log"
 DEBUG_STD="&>/dev/null"
 DEBUG_ERROR="2>/dev/null"
@@ -36,16 +37,16 @@ clear
 Banner
 
 # Install Essential  
-source setup/essential.sh
+source $ZFILES/setup/essential.sh
 
 # install GoLang
-source setup/golang.sh
+source $ZFILES/setup/golang.sh
 
 # Adjust settings
-source setup/settings.sh
+source $ZFILES/setup/settings.sh
 
 # Install tools
-source setup/tools.sh
+source $ZFILES/setup/tools.sh
 
 
 
