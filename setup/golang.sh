@@ -14,6 +14,9 @@ install_go(){
     sudo tar -C /usr/local -xzf ${GO_VERSION}.linux-amd64.tar.gz | pv
     rm -rf $GO_VERSION*
 
+    # Add to $PATH
+    export PATH=$PATH:/usr/local/go/bin
+
     # Add variables
     echo "${BLUE}Setting Go variables...${RESET}"
     time 1
