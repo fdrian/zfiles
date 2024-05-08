@@ -66,7 +66,7 @@ cd "$DIR" || {
 
 for REPO_PATH in "${REPOS[@]}"; do
   REPO_NAME=$(basename "$REPO_PATH")
-  echo "${BLUE}[+] Installing $REPO_NAME | from github.com/$REPO_PATH ${RESET}"
+  echo "${BLUE}[+] Installing $REPO_NAME | github.com/$REPO_PATH ${RESET}"
   
   if [ -d $REPO_NAME ]; then
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
@@ -101,8 +101,9 @@ for REPO_PATH in "${REPOS[@]}"; do
       cd $DIR || continue
 
     else
-      echo "${RED}[!] Unable to install $REPO_PATH, try manually!${RESET}\n"
+      echo "${RED}[!] Unable to install $REPO_PATH, try manually!${RESET}"
     fi
+  fi
 done
 
 mkdir -p ~/Lists/
