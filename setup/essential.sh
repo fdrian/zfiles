@@ -1,7 +1,7 @@
 #!/bin/bash
 # essential.sh
 
-PACKAGE_LIST="setup/packages/essential.txt" 
+PACKAGE_LIST="$ZFILES/setup/packages/essential.txt" 
 
 echo "${YELLOW}[+] Running $0...${RESET}"
 
