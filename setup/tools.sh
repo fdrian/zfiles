@@ -82,9 +82,9 @@ for REPO_PATH in "${REPOS[@]}"; do
     for REQ in requirements.txt setup.py Makefile; do
       if [ -s "$REQ" ]; then
         case "$REQ" in
-          "requirements.txt") $SUDO pip3 install -r "$REQ" $DEBUG_STD ;;
-          "setup.py") $SUDO python3 "$REQ" install $DEBUG_STD ;;
-          "Makefile") $SUDO make $DEBUG_STD; $SUDO make install $DEBUG_STD ;;
+          "requirements.txt") $SUDO pip3 install -r "$REQ" $DEBUG_LOG ;;
+          "setup.py") $SUDO python3 "$REQ" install $DEBUG_LOG ;;
+          "Makefile") $SUDO make $DEBUG_LOG; $SUDO make install $DEBUG_LOG ;;
         esac
       fi
     done
