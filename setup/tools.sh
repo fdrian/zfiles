@@ -74,11 +74,11 @@ cd "$DIR" || {
 for REPO_PATH in "${REPOS[@]}"; do
   REPO_NAME=$(basename "$REPO_PATH")
 
-  if git clone "https://github.com/$REPO_PATH$REPO_NAME"; then
-    sleep 100
+  if git clone "https://github.com/$REPO_PATH/$REPO_NAME"; then
+    
     cd $REPO_NAME || continue # Skip to next repo if cd fails
-
-    git pull $DEBUG_STD
+    pwd
+    sleep 100
 
     for REQ in requirements.txt setup.py Makefile; do
       if [ -s "$REQ" ]; then
