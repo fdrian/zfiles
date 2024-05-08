@@ -49,7 +49,7 @@ source $ZFILES/setup/settings.sh
 source $ZFILES/setup/tools.sh
 
 # Install wordlists
-source $ZFILES/setup/tools.sh
+source $ZFILES/setup/wordlists.sh
 
 
 
