@@ -2,6 +2,8 @@
 #  Hacking Tools
 
 echo "${YELLOW}[+] Running $0...${RESET}"
+TOOLS_LIST="$ZFILES/setup/packages/hacktools.txt" 
+DIR="$HOME/Tools"
 
 install_tool() {
   local TOOL="$1"
@@ -16,8 +18,6 @@ install_tool() {
     go install $REPO@latest | pv
   fi
 }
-
-TOOLS_LIST="$ZFILES/setup/packages/hacktools.txt" 
 
 while read -r TOOL REPO; do    
     install_tool $TOOL $REPO
@@ -55,7 +55,7 @@ declare -A REPOS=(
     ["XSStrike-Reborn"]="ItsIgnacioPortal/XSStrike-Reborn"
 )
 
-DIR="$HOME/Tools"
+
 echo "${BLUE}\n Running: Installing repositories (${#REPOS[@]})${RESET}\n\n"
 
 mkdir -p "$DIR" || {
@@ -69,29 +69,42 @@ cd "$DIR" || {
 
 for REPO_PATH in "${REPOS[@]}"; do
   REPO_NAME=$(basename "$REPO_PATH")
-
-  if git clone "https://github.com/$REPO_PATH"; then
-    
-    for REQ in requirements.txt setup.py Makefile; do
-      if [ -s "$REQ" ]; then
-        case "$REQ" in
-          "requirements.txt") $SUDO pip3 install -r "$REQ" $DEBUG_LOG ;;
-          "setup.py") $SUDO python3 "$REQ" install $DEBUG_LOG ;;
-          "Makefile") $SUDO make $DEBUG_LOG; $SUDO make install $DEBUG_LOG ;;
-        esac
-      fi
-    done
-
-    # Repo-specific actions (GF patterns)
-    if [[ "$REPO_NAME" == *gf* ]]; then
-      mkdir -p ~/.gf && cp -r examples/*.json ~/.gf $DEBUG_LOG
+  
+  if [ -d $REPO_NAME ]; then
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+      echo "${YELLOW} Checking updates for $REPO_NAME...${RESET}"
+      cd $REPO_NAME || continue
+      git pull --force $DEBUG_LOG
+    else      
+      echo "${YELLOW}[*] Converting $REPO_NAME into a Git repo...${RESET}\n"
+      rm -rf .git # Remove any leftover .git remnants (if necessary)
+      git init 
+      git remote add origin "https://github.com/$REPO_PATH"
+      git pull origin master $DEBUG_LOG 
     fi
-
-    cd $DIR || continue
-
   else
-    echo "${RED}[!] Unable to install $REPO_PATH, try manually!${RESET}\n"
-  fi
+    if git clone "https://github.com/$REPO_PATH"; then
+      
+      for REQ in requirements.txt setup.py Makefile; do
+        if [ -s "$REQ" ]; then
+          case "$REQ" in
+            "requirements.txt") $SUDO pip3 install -r "$REQ" $DEBUG_LOG ;;
+            "setup.py") $SUDO python3 "$REQ" install $DEBUG_LOG ;;
+            "Makefile") $SUDO make $DEBUG_LOG; $SUDO make install $DEBUG_LOG ;;
+          esac
+        fi
+      done
+
+      # Repo-specific actions (GF patterns)
+      if [[ "$REPO_NAME" == *gf* ]]; then
+        mkdir -p ~/.gf && cp -r examples/*.json ~/.gf $DEBUG_LOG
+      fi
+
+      cd $DIR || continue
+
+    else
+      echo "${RED}[!] Unable to install $REPO_PATH, try manually!${RESET}\n"
+    fi
 done
 
 ###
