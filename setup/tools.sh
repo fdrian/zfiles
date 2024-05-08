@@ -95,7 +95,7 @@ for REPO_PATH in "${REPOS[@]}"; do
 
       # Repo-specific actions (GF patterns)
       if [[ "$REPO_NAME" == *gf* ]]; then
-        mkdir -p ~/.gf && cp -r examples/*.json ~/.gf $DEBUG_STD
+        mkdir -p ~/.gf && cp -r examples/*.json ~/.gf
       fi
 
       cd $DIR || continue
