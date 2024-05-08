@@ -1,9 +1,9 @@
 #!/bin/bash
 # essential.sh
 
-PACKAGE_LIST="$ZFILES/setup/packages/essential.txt" 
-
 echo "${YELLOW}[+] Running $0...${RESET}"
+
+PACKAGE_LIST="$ZFILES/setup/packages/essential.txt" 
 
 # Check system version
 if [[ $ID == "arch" || $ID_LIKE == *"arch"* ]]; then
