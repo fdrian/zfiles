@@ -8,7 +8,7 @@ install_tool() {
   local REPO="$2"
 
   # Check if tool is installed
-  if command -v $tool &>/dev/null; then
+  if command -v $TOOL &>/dev/null; then
     echo "${YELLOW}[+] $TOOL is already installed${RESET}"
   else
     echo "${BLUE}[+] Installing $TOOL${RESET}"
@@ -27,11 +27,7 @@ done < "$TOOLS_LIST"
 mkdir -p ~/.gf
 cp -r $GOPATH/src/github.com/tomnomnom/gf/examples ~/.gf
 
-mkdir -p ~/Tools/
-mkdir -p ~/Lists/
-mkdir -p ~/.config/notify/
-mkdir -p ~/.config/amass/
-mkdir -p ~/.config/nuclei/
+
 
 # List of repositories
 declare -A REPOS=( 
@@ -102,6 +98,11 @@ for REPO_PATH in "${REPOS[@]}"; do
   fi
 done
 
+###
+mkdir -p ~/Lists/
+mkdir -p ~/.config/notify/
+mkdir -p ~/.config/amass/
+mkdir -p ~/.config/nuclei/
 
 
 echo "${GREEN} Finished...${RESET}"
