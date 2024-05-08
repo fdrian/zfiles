@@ -25,9 +25,6 @@ done < "$TOOLS_LIST"
 
 # Config Dirs
 mkdir -p ~/.gf
-cp -r $GOPATH/src/github.com/tomnomnom/gf/examples ~/.gf
-
-
 
 # List of repositories
 declare -A REPOS=( 
@@ -74,13 +71,13 @@ for REPO_PATH in "${REPOS[@]}"; do
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
       echo "${YELLOW} Checking updates for $REPO_NAME...${RESET}"
       cd $REPO_NAME || continue
-      git pull --force $DEBUG_LOG
+      git pull --force $DEBUG_STD
     else      
       echo "${YELLOW}[*] Converting $REPO_NAME into a Git repo...${RESET}\n"
       rm -rf .git # Remove any leftover .git remnants (if necessary)
       git init 
       git remote add origin "https://github.com/$REPO_PATH"
-      git pull origin master $DEBUG_LOG 
+      git pull origin master $DEBUG_STD 
     fi
   else
     if git clone "https://github.com/$REPO_PATH"; then
@@ -88,16 +85,16 @@ for REPO_PATH in "${REPOS[@]}"; do
       for REQ in requirements.txt setup.py Makefile; do
         if [ -s "$REQ" ]; then
           case "$REQ" in
-            "requirements.txt") $SUDO pip3 install -r "$REQ" $DEBUG_LOG ;;
-            "setup.py") $SUDO python3 "$REQ" install $DEBUG_LOG ;;
-            "Makefile") $SUDO make $DEBUG_LOG; $SUDO make install $DEBUG_LOG ;;
+            "requirements.txt") $SUDO pip3 install -r "$REQ" $DEBUG_STD ;;
+            "setup.py") $SUDO python3 "$REQ" install $DEBUG_STD ;;
+            "Makefile") $SUDO make $DEBUG_STD; $SUDO make install $DEBUG_STD ;;
           esac
         fi
       done
 
       # Repo-specific actions (GF patterns)
       if [[ "$REPO_NAME" == *gf* ]]; then
-        mkdir -p ~/.gf && cp -r examples/*.json ~/.gf $DEBUG_LOG
+        mkdir -p ~/.gf && cp -r examples/*.json ~/.gf $DEBUG_STD
       fi
 
       cd $DIR || continue
