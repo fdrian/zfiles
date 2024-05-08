@@ -4,6 +4,7 @@ curl
 wget
 zip
 p7zip
+p7zip-full
 jq
 pv
 htop
