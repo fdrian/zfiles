@@ -49,4 +49,4 @@ metabigor github.com/j3ssie/metabigor
 hakrevdns github.com/hakluke/hakrevdns
 alterx github.com/projectdiscovery/alterx/cmd/alterx
 katana github.com/projectdiscovery/katana/cmd/katana
-sourcemapper https://github.com/denandz/sourcemapper
+sourcemapper github.com/denandz/sourcemapper

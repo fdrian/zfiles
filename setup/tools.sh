@@ -13,7 +13,7 @@ install_tool() {
   else
     echo "${BLUE}[+] Installing $tool${RESET}"
     sleep 1
-    go install $repo@latest | pv
+    go install -v $repo@latest
   fi
 }
 
