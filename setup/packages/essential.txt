@@ -3,7 +3,9 @@ git
 curl
 wget
 zip
+p7zip
 jq
 pv
 htop
 libpcap-dev
+openvpn

@@ -48,5 +48,8 @@ source $ZFILES/setup/settings.sh
 # Install tools
 source $ZFILES/setup/tools.sh
 
+# Install wordlists
+source $ZFILES/setup/tools.sh
+
 
 
