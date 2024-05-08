@@ -3,6 +3,7 @@
 
 echo "${YELLOW}[+] Running $0...${RESET}"
 
+# Settings Wordlists
 if [[ ! -d /usr/share/wordlists ]]; then
     mkdir -p /usr/share/wordlists
 

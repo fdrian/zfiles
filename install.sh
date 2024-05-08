@@ -18,10 +18,13 @@ cp ~/.zshrc ~/.zshrc.backup
 
 # Constants
 export ZFILES=$PWD
-LOG_FILE="errors.log"
 DEBUG_STD="&>/dev/null"
 DEBUG_ERROR="2>/dev/null"
+LOG_FILE="errors.log"
+DEBUG_LOG="2>> $LOG_FILE"
+SUDO="sudo"
 source /etc/os-release
+
 
 # Colors
 RED=`tput setaf 1`
