@@ -13,14 +13,14 @@ install_tool() {
   else
     echo "${BLUE}[+] Installing $TOOL${RESET}"
     sleep 1
-    go install -v $REPO@latest | pv
+    go install $REPO@latest | pv
   fi
 }
 
 TOOLS_LIST="$ZFILES/setup/packages/hacktools.txt" 
 
 while read -r TOOL REPO; do    
-    install_tool  $TOOL $REPO
+    install_tool $TOOL $REPO
 done < "$TOOLS_LIST"
 
 # Config Dirs
@@ -74,7 +74,7 @@ cd "$DIR" || {
 for REPO_PATH in "${REPOS[@]}"; do
   REPO_NAME=$(basename "$REPO_PATH")
 
-  if git clone https://github.com/"$REPO_PATH" "$REPO_NAME" $DEBUG_STD; then
+  if git clone https://github.com/"$REPO_PATH$REPO_NAME"; then
     cd $REPO_NAME || continue # Skip to next repo if cd fails
 
     git pull $DEBUG_STD

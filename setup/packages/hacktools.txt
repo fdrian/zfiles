@@ -4,7 +4,6 @@ hakrawler github.com/hakluke/hakrawler
 tojson github.com/tomnomnom/hacks/tojson
 gowitness github.com/sensepost/gowitness
 Rush github.com/shenwei356/rush
-Gf-Patterns github.com/1ndianl33t/Gf-Patterns
 waybackurls github.com/tomnomnom/hacks/waybackurls
 gf github.com/tomnomnom/gf
 LinkFinder dark-warlord14/LinkFinder
