@@ -13,6 +13,9 @@ Banner(){
     echo "v0.01"
 }
 
+# Backup
+cp ~/.zshrc ~/.zshrc.backup
+
 # Constants
 export ZFILES=$PWD
 LOG_FILE="errors.log"
