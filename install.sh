@@ -48,7 +48,7 @@ source $ZFILES/setup/golang.sh
 # Adjust settings
 source $ZFILES/setup/settings.sh
 
-# Install tools
+# Install Hack Tools
 source $ZFILES/setup/tools.sh
 
 # Install wordlists

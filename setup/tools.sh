@@ -17,7 +17,7 @@ install_tool() {
   fi
 }
 
-TOOLS_LIST="$ZFILES/setup/packages/tools.txt" 
+TOOLS_LIST="$ZFILES/setup/packages/hacktools.txt" 
 
 while read -r tool repo; do    
     install_tool  $tool $repo
