@@ -26,7 +26,7 @@ elif [[ $ID == "ubuntu" || $ID_LIKE == *"debian"* ]]; then
         if command -v $package &>/dev/null;then
             echo "${YELLOW}[+] $package is already installed!${RESET}"
         else
-            sudo apt install -y $package 2>> $LOG_FILE
+            apt install -y $package 2>> $LOG_FILE
         fi
 
     done < "$PACKAGE_LIST"    
