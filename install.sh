@@ -18,11 +18,11 @@ cp ~/.zshrc ~/.zshrc.backup
 
 # Constants
 export ZFILES=$PWD
-DEBUG_STD="&>/dev/null"
-DEBUG_ERROR="2>/dev/null"
-LOG_FILE="errors.log"
-DEBUG_LOG="2>> $LOG_FILE"
-SUDO="sudo"
+export DEBUG_STD="&>/dev/null"
+export DEBUG_ERROR="2>/dev/null"
+export LOG_FILE="$ZFILES/errors.log"
+export DEBUG_LOG="2>> $LOG_FILE"
+export SUDO="sudo"
 source /etc/os-release
 
 
