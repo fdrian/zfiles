@@ -21,7 +21,7 @@ if [[ $ID == "arch" || $ID_LIKE == *"arch"* ]]; then
         echo "${RED}yay is not installed. Please install yay first.${RESET}"
     fi
 elif [[ $ID == "ubuntu" || $ID_LIKE == *"debian"* ]]; then
-    #apt update
+    apt update
     while read -r package; do
         if command -v $package &>/dev/null;then
             echo "${YELLOW}[+] $package is already installed!${RESET}"
