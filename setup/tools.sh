@@ -74,7 +74,8 @@ cd "$DIR" || {
 for REPO_PATH in "${REPOS[@]}"; do
   REPO_NAME=$(basename "$REPO_PATH")
 
-  if git clone https://github.com/"$REPO_PATH$REPO_NAME"; then
+  if git clone "https://github.com/$REPO_PATH$REPO_NAME"; then
+    sleep 100
     cd $REPO_NAME || continue # Skip to next repo if cd fails
 
     git pull $DEBUG_STD
