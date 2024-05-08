@@ -66,6 +66,7 @@ cd "$DIR" || {
 
 for REPO_PATH in "${REPOS[@]}"; do
   REPO_NAME=$(basename "$REPO_PATH")
+  echo "${BLUE}[+] Installing $REPO_NAME | from github.com/$REPO_PATH ${RESET}"
   
   if [ -d $REPO_NAME ]; then
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
@@ -104,7 +105,6 @@ for REPO_PATH in "${REPOS[@]}"; do
     fi
 done
 
-###
 mkdir -p ~/Lists/
 mkdir -p ~/.config/notify/
 mkdir -p ~/.config/amass/

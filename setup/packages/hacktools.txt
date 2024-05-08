@@ -6,7 +6,6 @@ gowitness github.com/sensepost/gowitness
 Rush github.com/shenwei356/rush
 waybackurls github.com/tomnomnom/hacks/waybackurls
 gf github.com/tomnomnom/gf
-LinkFinder dark-warlord14/LinkFinder
 Naabu github.com/projectdiscovery/naabu/v2/cmd/naabu
 hakcheckurl github.com/hakluke/hakcheckurl
 shuffledns github.com/projectdiscovery/shuffledns/cmd/shuffledns
