@@ -1,7 +1,7 @@
 # zfiles
 ### The definitive guide to setup my workspace!
-### Author: Wellington Moraes <wellpunk@gmail.com>
-### Modified by Drian <me@adrianofreitas.me>
+### Author: [Wellpunk](mailto:wellpunk@gmail.com)
+### Modified by [Drian](mailto:drian@duck.com)
 ### Hack the planet!
 
 ```bash
