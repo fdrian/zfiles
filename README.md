@@ -1,8 +1,8 @@
 # zfiles
-# The definitive guide to setup my Python workspace with ubuntu and ZSH
-# Author: Wellington Moraes <wellpunk@gmail.com>
-# Modified by Drian <me@adrianofreitas.me>
-# Hack the planet!
+### The definitive guide to setup my workspace!
+### Author: Wellington Moraes <wellpunk@gmail.com>
+### Modified by Drian <me@adrianofreitas.me>
+### Hack the planet!
 
 ```bash
 git clone https://github.com/fdrian/zfiles.git
