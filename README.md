@@ -1,18 +1,16 @@
-# zfiles
+# zfiles.sh v0.1
 ### The definitive guide to setup my workspace!
 ### Author: [Wellpunk](mailto:wellpunk@gmail.com)
 ### Modified by [Drian](mailto:drian@duck.com)
 ### Hack the planet!
 
-```
     ██████╗░ ██████╗░ ██╗ ░█████╗░ ███╗░░██╗"
     ██╔══██╗ ██╔══██╗ ██║ ██╔══██╗ ████╗░██║"
     ██║░░██║ ██████╔╝ ██║ ███████║ ██╔██╗██║"
     ██║░░██║ ██╔══██╗ ██║ ██╔══██║ ██║╚████║"
     ██████╔╝ ██║░░██║ ██║ ██║░░██║ ██║░╚███║"
     ╚═════╝░ ╚═╝░░╚═╝ ╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚══╝"
-    echo "v0.01"
-```
+
 ```bash
 git clone https://github.com/fdrian/zfiles.git
 ```
