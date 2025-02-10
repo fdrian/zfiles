@@ -1,4 +1,4 @@
-# zfiles.sh v0.1
+# zfiles.sh v0.2
 ### The guide to setup my workspace!
 Author: [Drian](mailto:drian@duck.com)
 Inspired by [Wellpunk](mailto:wellpunk@gmail.com)
@@ -11,18 +11,15 @@ Inspired by [Wellpunk](mailto:wellpunk@gmail.com)
     ██████╔╝ ██║░░██║ ██║ ██║░░██║ ██║░╚███║"
     ╚═════╝░ ╚═╝░░╚═╝ ╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚══╝"
 
-```bash
+```sh
+sudo apt update
+```
+```sh
 git clone https://github.com/fdrian/zfiles.git
 ```
-
-```bash
+```sh
 cd zfiles; 
 ```
-
-```bash
-sudo apt update || sudo pacman -Syu
-```
-
-```bash
-source install.sh
+```sh
+chmod +x install.sh && bash install.sh
 ```
