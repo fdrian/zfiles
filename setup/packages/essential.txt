@@ -3,10 +3,13 @@ git
 curl
 wget
 zip
+unzip
+7zip
 p7zip
 p7zip-full
 jq
 pv
 htop
+btop
 libpcap-dev
 openvpn
