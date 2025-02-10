@@ -1,8 +1,8 @@
 # zfiles.sh v0.1
-### The definitive guide to setup my workspace!
-### Author: [Wellpunk](mailto:wellpunk@gmail.com)
-### Modified by [Drian](mailto:drian@duck.com)
-### Hack the planet!
+### The guide to setup my workspace!
+Author: [Drian](mailto:drian@duck.com)
+Inspired by [Wellpunk](mailto:wellpunk@gmail.com)
+
 
     ██████╗░ ██████╗░ ██╗ ░█████╗░ ███╗░░██╗"
     ██╔══██╗ ██╔══██╗ ██║ ██╔══██╗ ████╗░██║"
