@@ -1,62 +1,56 @@
 #!/bin/bash
-# Drian
+# Drian - Install Script v0.02
 
-echo "${YELLOW}[+] Running $0...${RESET}"
-
-Banner(){
-   
-    echo "██████╗░ ██████╗░ ██╗ ░█████╗░ ███╗░░██╗"
-    echo "██╔══██╗ ██╔══██╗ ██║ ██╔══██╗ ████╗░██║"
-    echo "██║░░██║ ██████╔╝ ██║ ███████║ ██╔██╗██║"
-    echo "██║░░██║ ██╔══██╗ ██║ ██╔══██║ ██║╚████║"
-    echo "██████╔╝ ██║░░██║ ██║ ██║░░██║ ██║░╚███║"
-    echo "╚═════╝░ ╚═╝░░╚═╝ ╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚══╝"
-    echo "v0.01"
+# Banner Function
+banner() {
+    echo -e "\e[34m"  # Set color to blue
+    cat << "EOF"
+██████╗░ ██████╗░ ██╗ ░█████╗░ ███╗░░██╗
+██╔══██╗ ██╔══██╗ ██║ ██╔══██╗ ████╗░██║
+██║░░██║ ██████╔╝ ██║ ███████║ ██╔██╗██║
+██║░░██║ ██╔══██╗ ██║ ██╔══██║ ██║╚████║
+██████╔╝ ██║░░██║ ██║ ██║░░██║ ██║░╚███║
+╚═════╝░ ╚═╝░░╚═╝ ╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚══╝
+v0.02
+EOF
+    echo -e "\e[0m"  # Reset color
 }
 
-# Backup
-cp ~/.zshrc ~/.zshrc.backup
-
-# Constants
-export ZFILES=$PWD
-export DEBUG_STD="&>/dev/null"
-export DEBUG_ERROR="2>/dev/null"
-export LOG_FILE="$ZFILES/errors.log"
-export DEBUG_LOG="2>>$LOG_FILE"
-export SUDO="sudo"
-source /etc/os-release
-
-
-# Colors
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`  
-RESET=`tput sgr0`
-
-# Check for root privileges
+# Check if running as root
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root (use sudo)" 
-   exit 1
+    echo -e "\e[31m[ERROR] This script must be run as root (use sudo)\e[0m"
+    exit 1
 fi
 
+# Set constants
+export ZFILES=$PWD
+export LOG_FILE="$ZFILES/errors.log"
+exec 2>> "$LOG_FILE"  # Redirect stderr to log file
+
+# Set colors
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+RESET="\e[0m"
+
 clear
-Banner
+banner
 
-# Install Essential  
-source $ZFILES/setup/essential.sh
+# Backup
+cp ~/.zshrc ~/.zshrc.backup 2>/dev/null || echo -e "${YELLOW}[WARNING] Failed to backup ~/.zshrc${RESET}"
 
-# install GoLang
-source $ZFILES/setup/golang.sh
+# Install modules
+SETUP_SCRIPTS=(essential.sh golang.sh settings.sh tools.sh wordlists.sh)
 
-# Adjust settings
-source $ZFILES/setup/settings.sh
+for script in "${SETUP_SCRIPTS[@]}"; do
+    if [[ -f "$ZFILES/setup/$script" ]]; then
+        echo -e "${BLUE}[+] Running $script...${RESET}"
+        bash "$ZFILES/setup/$script"
+    else
+        echo -e "${RED}[ERROR] $script not found! Skipping...${RESET}"
+    fi
+    sleep 1
+done
 
-# Install Hack Tools
-source $ZFILES/setup/tools.sh
-
-# Install wordlists
-source $ZFILES/setup/wordlists.sh
-
-
-
+echo -e "${GREEN}[*] Installation completed!${RESET}"
