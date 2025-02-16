@@ -2,6 +2,12 @@
 # Author: Drian @xfdrian
 # recon.sh v0.01
 
+# Source the banner script
+source "$(dirname "$0")/banner.sh"
+
+clear 
+banner
+
 # Check if the required arguments are provided
 if [[ $# -lt 2 ]]; then
     echo "Usage: $0 <platform> <program>"
@@ -23,11 +29,6 @@ else
     exit 1
 fi
 
-# Source the banner script
-source "$(dirname "$0")/banner.sh"
-
-clear 
-banner
 
 # Ensure the target directory exists
 mkdir -p "$HUNT_DIR"
