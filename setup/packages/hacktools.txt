@@ -1,50 +1,64 @@
-nuclei github.com/projectdiscovery/nuclei/v2/cmd/nuclei
-fff github.com/tomnomnom/fff
-hakrawler github.com/hakluke/hakrawler
-tojson github.com/tomnomnom/hacks/tojson
-gowitness github.com/sensepost/gowitness
-Rush github.com/shenwei356/rush
-waybackurls github.com/tomnomnom/hacks/waybackurls
-gf github.com/tomnomnom/gf
-Naabu github.com/projectdiscovery/naabu/v2/cmd/naabu
-hakcheckurl github.com/hakluke/hakcheckurl
-shuffledns github.com/projectdiscovery/shuffledns/cmd/shuffledns
-gron github.com/tomnomnom/gron
-html-tool github.com/tomnomnom/hacks/html-tool
-Chaos github.com/projectdiscovery/chaos-client/cmd/chaos
-qsreplace github.com/tomnomnom/qsreplace
-Amass github.com/owasp-amass/amass/v4/...
-ffuf github.com/ffuf/ffuf
+# ========== RECON & SUBDOMAIN ENUMERATION ==========
+subfinder github.com/projectdiscovery/subfinder/v2/cmd/subfinder
 assetfinder github.com/tomnomnom/assetfinder
 github-subdomains github.com/gwen001/github-subdomains
-anew github.com/tomnomnom/anew
-notify github.com/projectdiscovery/notify/cmd/notify
-mildew github.com/daehee/mildew/cmd/mildew
-dirdar github.com/m4dm0e/dirdar
-unfurl github.com/tomnomnom/unfurl
-httpx github.com/projectdiscovery/httpx/cmd/httpx
+Chaos github.com/projectdiscovery/chaos-client/cmd/chaos
+waybackurls github.com/tomnomnom/hacks/waybackurls
+hakrevdns github.com/hakluke/hakrevdns
+shuffledns github.com/projectdiscovery/shuffledns/cmd/shuffledns
+puredns github.com/d3mondev/puredns/v2
 dnsx github.com/projectdiscovery/dnsx/cmd/dnsx
-subfinder github.com/projectdiscovery/subfinder/v2/cmd/subfinder
+hakcheckurl github.com/hakluke/hakcheckurl
+amass github.com/owasp-amass/amass/v4/cmd/amass
+scopein github.com/ferreiraklet/scopein
+alterx github.com/projectdiscovery/alterx/cmd/alterx
+gotator github.com/Josue87/gotator
+
+# ========== WEB CRAWLING & SPIDERING ==========
+hakrawler github.com/hakluke/hakrawler
+katana github.com/projectdiscovery/katana/cmd/katana
+gospider github.com/jaeles-project/gospider
+
+# ========== URL FILTERING & PARAMETER COLLECTION ==========
 gauplus github.com/bp0lr/gauplus
 subjs github.com/lc/subjs
-Gxss github.com/KathanP19/Gxss
-gospider github.com/jaeles-project/gospider
-dalfox github.com/hahwul/dalfox/v2
-puredns github.com/d3mondev/puredns/v2
-interactsh-client github.com/projectdiscovery/interactsh/cmd/interactsh-client
-gotator github.com/Josue87/gotator
-kxss github.com/tomnomnom/hacks/kxss
+unfurl github.com/tomnomnom/unfurl
 GetJs github.com/003random/getJS
 Goop github.com/deletescape/goop
-Meg github.com/tomnomnom/meg
-Freq github.com/takshal/freq
-Sdlookup github.com/j3ssie/sdlookup
+html-tool github.com/tomnomnom/hacks/html-tool
+freq github.com/takshal/freq
+
+# ========== VULNERABILITY SCANNING ==========
+nuclei github.com/projectdiscovery/nuclei/v2/cmd/nuclei
+httpx github.com/projectdiscovery/httpx/cmd/httpx
+dalfox github.com/hahwul/dalfox/v2
+Gxss github.com/KathanP19/Gxss
+kxss github.com/tomnomnom/hacks/kxss
 Airixss github.com/ferreiraklet/airixss
 Nilo github.com/ferreiraklet/nilo
-haip2host github.com/hakluke/haip2host
-scopein github.com/ferreiraklet/scopein
+interactsh-client github.com/projectdiscovery/interactsh/cmd/interactsh-client
+
+# ========== FUZZING & BRUTEFORCE ==========
+ffuf github.com/ffuf/ffuf
+dirdar github.com/m4dm0e/dirdar
+
+# ========== INFORMATION DISCOVERY ==========
 metabigor github.com/j3ssie/metabigor
-hakrevdns github.com/hakluke/hakrevdns
-alterx github.com/projectdiscovery/alterx/cmd/alterx
-katana github.com/projectdiscovery/katana/cmd/katana
 sourcemapper github.com/denandz/sourcemapper
+Meg github.com/tomnomnom/meg
+Rush github.com/shenwei356/rush
+qsreplace github.com/tomnomnom/qsreplace
+
+# ========== FILE DISCOVERY & GIT ENUMERATION ==========
+gf github.com/tomnomnom/gf
+Gf-Patterns github.com/1ndianl33t/Gf-Patterns
+xnLinkFinder github.com/xnl-h4ck3r/xnLinkFinder
+SecretFinder github.com/m4ll0k/SecretFinder
+GitTools github.com/internetwache/GitTools
+git-dumper github.com/arthaud/git-dumper
+
+# ========== NOTIFICATIONS & AUTOMATION ==========
+notify github.com/projectdiscovery/notify/cmd/notify
+anew github.com/tomnomnom/anew
+mildew github.com/daehee/mildew/cmd/mildew
+haip2host github.com/hakluke/haip2host
