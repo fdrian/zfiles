@@ -1,5 +1,6 @@
 #!/bin/bash
-# Drian - Install Script v0.03
+# Author: Drian - 
+# Install Script v0.03
 
 # Banner Function
 banner() {
