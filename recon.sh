@@ -14,6 +14,16 @@ if [[ $# -lt 2 ]]; then
     exit 1
 fi
 
+# Load environment variables from .env file
+ENV_FILE="$HOME/Hunt/.env"
+
+if [[ -f "$ENV_FILE" ]]; then
+    export $(grep -v '^#' "$ENV_FILE" | xargs)
+else
+    echo "[ERROR] .env file not found! Ensure API keys are set in $ENV_FILE."
+    exit 1
+fi
+
 PLATFORM=$1
 PROGRAM=$2
 HUNT_DIR="$HOME/Hunt/$PLATFORM/$PROGRAM"
@@ -32,53 +42,38 @@ fi
 echo "[+] Loading domains from scope..."
 cp "$SCOPE_FILE" "$HUNT_DIR/domains.txt"
 
-# Enumerate subdomains
-echo "[+] Enumerating subdomains..."
+# Fastest and most reliable source: `subfinder`
+echo "[+] Running subfinder (fastest)..."
 subfinder -dL "$HUNT_DIR/domains.txt" -o "$HUNT_DIR/subfinder.txt"
-assetfinder -subs-only $(cat "$HUNT_DIR/domains.txt") > "$HUNT_DIR/assetfinder.txt"
-github-subdomains -dL "$HUNT_DIR/domains.txt" -t "$GITHUB_TOKEN" > "$HUNT_DIR/github.txt"
-chaos -dL "$HUNT_DIR/domains.txt" -key "$CHAOS_API_KEY" -o "$HUNT_DIR/chaos.txt"
-amass enum -passive -df "$HUNT_DIR/domains.txt" -o "$HUNT_DIR/amass.txt"
+
+# Extra API-based sources (run only if API keys are available)
+if [[ -n "$GITHUB_TOKEN" ]]; then
+    echo "[+] Running github-subdomains (requires API key)..."
+    github-subdomains -dL "$HUNT_DIR/domains.txt" -t "$GITHUB_TOKEN" > "$HUNT_DIR/github.txt"
+fi
+
+if [[ -n "$CHAOS_API_KEY" ]]; then
+    echo "[+] Running chaos (requires API key)..."
+    chaos -dL "$HUNT_DIR/domains.txt" -key "$CHAOS_API_KEY" -o "$HUNT_DIR/chaos.txt"
+fi
 
 # Merge all subdomains into a single file
 cat "$HUNT_DIR/"*.txt | sort -u > "$HUNT_DIR/subdomains.txt"
 
-# Validate subdomains with DNS resolution (dnsx)
+# DNS Resolution with `dnsx`
 echo "[+] Resolving valid subdomains using dnsx..."
 dnsx -l "$HUNT_DIR/subdomains.txt" -o "$HUNT_DIR/resolved.txt"
 
-# Check for live HTTP servers using httpx
+# Web server validation with `httpx`
 echo "[+] Checking for live web servers..."
 httpx -l "$HUNT_DIR/resolved.txt" -silent -o "$HUNT_DIR/alive.txt"
 
-# Extract URLs and endpoints
-echo "[+] Extracting URLs and endpoints..."
-cat "$HUNT_DIR/alive.txt" | waybackurls > "$HUNT_DIR/wayback.txt"
-cat "$HUNT_DIR/alive.txt" | gauplus > "$HUNT_DIR/gau.txt"
-katana -list "$HUNT_DIR/alive.txt" -o "$HUNT_DIR/katana.txt"
-hakrawler -url "$HUNT_DIR/alive.txt" -plain > "$HUNT_DIR/hakrawler.txt"
-gospider -S "$HUNT_DIR/alive.txt" -o "$HUNT_DIR/gospider.txt"
-
-cat "$HUNT_DIR/"*.txt | sort -u > "$HUNT_DIR/urls.txt"
-
-# Search for parameters and endpoints
-echo "[+] Searching for parameters and endpoints..."
-cat "$HUNT_DIR/urls.txt" | unfurl --unique keys > "$HUNT_DIR/params.txt"
-getJS --input "$HUNT_DIR/alive.txt" -o "$HUNT_DIR/js.txt"
-subjs -i "$HUNT_DIR/alive.txt" -o "$HUNT_DIR/subjs.txt"
-xnLinkFinder -i "$HUNT_DIR/urls.txt" -o "$HUNT_DIR/xnlinks.txt"
-
-cat "$HUNT_DIR/params.txt" "$HUNT_DIR/js.txt" "$HUNT_DIR/subjs.txt" "$HUNT_DIR/xnlinks.txt" | sort -u > "$HUNT_DIR/endpoints.txt"
-
-# Test for potential vulnerabilities
-echo "[+] Testing for potential vulnerabilities..."
-cat "$HUNT_DIR/endpoints.txt" | gf sqli > "$HUNT_DIR/sqli_candidates.txt"
-cat "$HUNT_DIR/endpoints.txt" | gf xss > "$HUNT_DIR/xss_candidates.txt"
-cat "$HUNT_DIR/endpoints.txt" | gf lfi > "$HUNT_DIR/lfi_candidates.txt"
-cat "$HUNT_DIR/endpoints.txt" | gf ssrf > "$HUNT_DIR/ssrf_candidates.txt"
-
-dalfox file "$HUNT_DIR/xss_candidates.txt" -o "$HUNT_DIR/xss_results.txt"
-nuclei -l "$HUNT_DIR/alive.txt" -t ~/nuclei-templates/ -o "$HUNT_DIR/nuclei_results.txt"
-subzy -targets "$HUNT_DIR/subdomains.txt" -o "$HUNT_DIR/takeover_results.txt"
+# Optional: Deep scan using `amass` (only if needed)
+if [[ "$3" == "--deep" ]]; then
+    echo "[+] Running deep passive recon with amass..."
+    amass enum -passive -df "$HUNT_DIR/domains.txt" -o "$HUNT_DIR/amass.txt"
+    cat "$HUNT_DIR/amass.txt" >> "$HUNT_DIR/subdomains.txt"
+    sort -u -o "$HUNT_DIR/subdomains.txt" "$HUNT_DIR/subdomains.txt"
+fi
 
 echo "[+] Recon process completed. Results stored in $HUNT_DIR"
