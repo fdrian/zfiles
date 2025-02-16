@@ -19,21 +19,11 @@ PROGRAM=$2
 HUNT_DIR="$HOME/Hunt/$PLATFORM/$PROGRAM"
 TOOLS_DIR="$HOME/Tools"
 SCOPE_FILE="$HUNT_DIR/scope.txt"
-ENV_FILE="$HOME/Hunt/.env"
 
-# Load environment variables from .env file
-if [[ -f "$ENV_FILE" ]]; then
-    export $(grep -v '^#' "$ENV_FILE" | xargs)
-else
-    echo "[ERROR] The .env file was not found! Set your API keys in $ENV_FILE."
-    exit 1
-fi
-
-
-# Ensure the target directory exists
+# Ensure required directories exist
 mkdir -p "$HUNT_DIR"
 
-# Verify if the scope file exists
+# Check if scope file exists
 if [[ ! -f "$SCOPE_FILE" ]]; then
     echo "[ERROR] Scope file ($SCOPE_FILE) not found. Add target domains before running recon."
     exit 1
@@ -53,9 +43,13 @@ amass enum -passive -df "$HUNT_DIR/domains.txt" -o "$HUNT_DIR/amass.txt"
 # Merge all subdomains into a single file
 cat "$HUNT_DIR/"*.txt | sort -u > "$HUNT_DIR/subdomains.txt"
 
-# Check for live subdomains
-echo "[+] Checking for live subdomains..."
-cat "$HUNT_DIR/subdomains.txt" | httpx -silent -o "$HUNT_DIR/alive.txt"
+# Validate subdomains with DNS resolution (dnsx)
+echo "[+] Resolving valid subdomains using dnsx..."
+dnsx -l "$HUNT_DIR/subdomains.txt" -o "$HUNT_DIR/resolved.txt"
+
+# Check for live HTTP servers using httpx
+echo "[+] Checking for live web servers..."
+httpx -l "$HUNT_DIR/resolved.txt" -silent -o "$HUNT_DIR/alive.txt"
 
 # Extract URLs and endpoints
 echo "[+] Extracting URLs and endpoints..."
