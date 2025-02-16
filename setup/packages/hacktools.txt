@@ -3,7 +3,7 @@ subfinder github.com/projectdiscovery/subfinder/v2/cmd/subfinder
 assetfinder github.com/tomnomnom/assetfinder
 github-subdomains github.com/gwen001/github-subdomains
 Chaos github.com/projectdiscovery/chaos-client/cmd/chaos
-waybackurls github.com/tomnomnom/hacks/waybackurls
+waybackurls github.com/tomnomnom/waybackurls
 hakrevdns github.com/hakluke/hakrevdns
 shuffledns github.com/projectdiscovery/shuffledns/cmd/shuffledns
 puredns github.com/d3mondev/puredns/v2
@@ -16,11 +16,11 @@ gotator github.com/Josue87/gotator
 
 # ========== WEB CRAWLING & SPIDERING ==========
 hakrawler github.com/hakluke/hakrawler
-katana github.com/projectdiscovery/katana/cmd/katana
+katana github.com/projectdiscovery/katana
 gospider github.com/jaeles-project/gospider
 
 # ========== URL FILTERING & PARAMETER COLLECTION ==========
-gauplus github.com/bp0lr/gauplus
+gau github.com/lc/gau
 subjs github.com/lc/subjs
 unfurl github.com/tomnomnom/unfurl
 GetJs github.com/003random/getJS

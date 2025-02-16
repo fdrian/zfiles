@@ -1,5 +1,6 @@
 #!/bin/bash
-# Hacking Tools Installer - Refactored
+# Author: Drian @xfdrian
+# tools.sh v0.01
 
 # Colors
 RED="\e[31m"
@@ -14,6 +15,17 @@ DIR="$HOME/Tools"
 LOG_FILE="$ZFILES/errors.log"
 exec 2>> "$LOG_FILE"  # Redirect stderr to log file
 
+# Ensure Go is installed
+if ! command -v go &> /dev/null; then
+    echo -e "${RED}[ERROR] Go is not installed. Run setup/golang.sh first.${RESET}"
+    exit 1
+fi
+
+# Ensure Go binaries are in PATH
+export PATH=$HOME/go/bin:$PATH
+echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.zshrc
+source ~/.zshrc
+
 # Ensure Tools directory exists
 mkdir -p "$DIR" || {
     echo -e "${RED}[ERROR] Failed to create $DIR${RESET}"
@@ -24,7 +36,7 @@ cd "$DIR" || {
     exit 1
 }
 
-# Install Go-based tools
+# Function to install Go-based tools
 install_tool() {
     local TOOL="$1"
     local REPO="$2"
@@ -37,9 +49,32 @@ install_tool() {
     fi
 }
 
+# Install Go-based tools from hacktools.txt
 while read -r TOOL REPO; do    
     install_tool "$TOOL" "$REPO"
 done < "$TOOLS_LIST"
+
+# Install missing essential tools
+echo -e "${BLUE}[+] Installing additional tools...${RESET}"
+ESSENTIAL_TOOLS=(
+    "waybackurls github.com/tomnomnom/waybackurls"
+    "gauplus github.com/bp0lr/gauplus"
+    "katana github.com/projectdiscovery/katana/cmd/katana"
+    "hakrawler github.com/hakluke/hakrawler"
+    "gospider github.com/jaeles-project/gospider"
+    "unfurl github.com/tomnomnom/unfurl"
+    "getJS github.com/003random/getJS"
+    "subjs github.com/lc/subjs"
+    "xnLinkFinder github.com/xnl-h4ck3r/xnLinkFinder"
+    "gf github.com/tomnomnom/gf"
+    "dalfox github.com/hahwul/dalfox/v2"
+    "nuclei github.com/projectdiscovery/nuclei/v2/cmd/nuclei"
+    "subzy github.com/LukaSikic/subzy"
+)
+
+for tool in "${ESSENTIAL_TOOLS[@]}"; do
+    install_tool $(echo $tool)
+done
 
 # Define repositories to clone
 declare -A REPOS=( 
