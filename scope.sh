@@ -2,23 +2,11 @@
 # Author: Drian @xfdrian
 # scope.sh v0.01
 
-banner() {
-    echo -e "\e[34m"  # Set color to blue
-    cat << "EOF"
-██████╗░ ██████╗░ ██╗ ░█████╗░ ███╗░░██╗
-██╔══██╗ ██╔══██╗ ██║ ██╔══██╗ ████╗░██║
-██║░░██║ ██████╔╝ ██║ ███████║ ██╔██╗██║
-██║░░██║ ██╔══██╗ ██║ ██╔══██║ ██║╚████║
-██████╔╝ ██║░░██║ ██║ ██║░░██║ ██║░╚███║
-╚═════╝░ ╚═╝░░╚═╝ ╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚══╝
-v0.03
-EOF
-    echo -e "\e[0m"  # Reset color
-}
+# Source the banner script
+source "$(dirname "$0")/banner.sh"
 
 clear
 banner
-#!/bin/bash
 
 # Check if required arguments are provided
 if [[ $# -lt 2 ]]; then

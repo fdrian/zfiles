@@ -23,18 +23,11 @@ else
     exit 1
 fi
 
-# Display banner
-clear
-echo -e "\e[34m"
-cat << "EOF"
-██████╗░ ██████╗░ ██╗ ░█████╗░ ███╗░░██╗
-██╔══██╗ ██╔══██╗ ██║ ██╔══██╗ ████╗░██║
-██║░░██║ ██████╔╝ ██║ ███████║ ██╔██╗██║
-██║░░██║ ██╔══██╗ ██║ ██╔══██║ ██║╚████║
-██████╔╝ ██║░░██║ ██║ ██║░░██║ ██║░╚███║
-╚═════╝░ ╚═╝░░╚═╝ ╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚══╝
-EOF
-echo -e "\e[0m"
+# Source the banner script
+source "$(dirname "$0")/banner.sh"
+
+clear 
+banner
 
 # Ensure the target directory exists
 mkdir -p "$HUNT_DIR"

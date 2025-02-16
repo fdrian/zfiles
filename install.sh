@@ -2,20 +2,8 @@
 # Author: Drian - 
 # Install Script v0.03
 
-# Banner Function
-banner() {
-    echo -e "\e[34m"  # Set color to blue
-    cat << "EOF"
-██████╗░ ██████╗░ ██╗ ░█████╗░ ███╗░░██╗
-██╔══██╗ ██╔══██╗ ██║ ██╔══██╗ ████╗░██║
-██║░░██║ ██████╔╝ ██║ ███████║ ██╔██╗██║
-██║░░██║ ██╔══██╗ ██║ ██╔══██║ ██║╚████║
-██████╔╝ ██║░░██║ ██║ ██║░░██║ ██║░╚███║
-╚═════╝░ ╚═╝░░╚═╝ ╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚══╝
-v0.03
-EOF
-    echo -e "\e[0m"  # Reset color
-}
+# Source the banner script
+source "$(dirname "$0")/banner.sh"
 
 # Check if running as root
 if [[ $EUID -ne 0 ]]; then
