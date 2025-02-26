@@ -95,6 +95,7 @@ declare -A REPOS=(
     ["Waymore"]="xnl-h4ck3r/waymore"
     ["altdns"]="infosec-au/altdns"
     ["XSStrike-Reborn"]="ItsIgnacioPortal/XSStrike-Reborn"
+    ["FuzzSwarm2"]="0xBl4nk/FuzzSwarm2"
 )
 
 # Clone or update repositories
