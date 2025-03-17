@@ -5,10 +5,9 @@
 # Source the banner script
 source "$(dirname "$0")/banner.sh"
 
-# Check if running as root
-if [[ $EUID -ne 0 ]]; then
-    echo -e "\e[31m[ERROR] This script must be run as root (use sudo)\e[0m"
-    exit 1
+# Check if running with sudo privileges
+if [[ $EUID -eq 0 ]]; then
+    echo -e "\e[31m[WARNING] Running as root is not recommended. Use a regular user with sudo.\e[0m"
 fi
 
 # Set constants
