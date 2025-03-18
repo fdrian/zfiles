@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Drian @xfdrian
-# scope.sh v0.04
+# scope.sh v0.05
 
 # Source the banner script
 source "$(dirname "$0")/banner.sh"
@@ -10,24 +10,19 @@ banner
 
 # Check if required arguments are provided
 if [[ $# -lt 2 ]]; then
-    echo "Usage: $0 --hackerone|--intigriti|--bugcrowd <program> [scope_file]"
+    echo -e "[ERROR] Missing arguments!"
+    echo -e "Usage: $0 --hackerone|--intigriti|--bugcrowd <program> [scope_file]"
     exit 1
 fi
 
 # Validate platform argument
 case "$1" in
-    --hackerone)
-        PLATFORM="hackerone"
-        ;;
-    --intigriti)
-        PLATFORM="intigriti"
-        ;;
-    --bugcrowd)
-        PLATFORM="bugcrowd"
-        ;;
+    --hackerone) PLATFORM="hackerone" ;;
+    --intigriti) PLATFORM="intigriti" ;;
+    --bugcrowd) PLATFORM="bugcrowd" ;;
     *)
-        echo "[ERROR] Invalid platform: '$1'"
-        echo "Valid options: --hackerone, --intigriti, --bugcrowd"
+        echo -e "[ERROR] Invalid platform: '$1'"
+        echo -e "Valid options: --hackerone, --intigriti, --bugcrowd"
         exit 1
         ;;
 esac
