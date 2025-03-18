@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Drian @xfdrian
-# scope.sh v0.05
+# scope.sh v0.07
 
 # Source the banner script
 source "$(dirname "$0")/banner.sh"
@@ -28,11 +28,19 @@ case "$1" in
 esac
 
 PROGRAM=$2
+
+# Validate program name (only allow alphanumeric characters, underscores, and hyphens)
+if [[ ! "$PROGRAM" =~ ^[a-zA-Z0-9_-]+$ ]]; then
+    echo -e "[ERROR] Invalid program name: '$PROGRAM'. Only alphanumeric characters, underscores, and hyphens are allowed."
+    exit 1
+fi
+
 HUNT_DIR="$HOME/bug/$PLATFORM/$PROGRAM"
 SCOPE_FILE="$HUNT_DIR/scope.txt"
 
 # Create required directories
 mkdir -p "$HUNT_DIR"
+echo "[+] Directory created: $HUNT_DIR"
 
 # If a scope file is provided, copy it to the correct location
 if [[ -n "$3" && -f "$3" ]]; then
