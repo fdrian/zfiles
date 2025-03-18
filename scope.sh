@@ -16,7 +16,7 @@ fi
 
 PLATFORM=$1
 PROGRAM=$2
-HUNT_DIR="$HOME/Hunt/$PLATFORM/$PROGRAM"
+HUNT_DIR="$HOME/bug/$PLATFORM/$PROGRAM"
 SCOPE_FILE="$HUNT_DIR/scope.txt"
 
 # Create required directories
@@ -34,7 +34,7 @@ fi
 
 # Display the directory structure
 echo "[+] Directory structure:"
-tree "$HOME/Hunt/$PLATFORM"
+tree "$HOME/bug/$PLATFORM"
 
 # Display the scope file contents if it exists
 if [[ -s "$SCOPE_FILE" ]]; then

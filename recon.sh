@@ -15,7 +15,7 @@ if [[ $# -lt 2 ]]; then
 fi
 
 # Load environment variables from .env file
-ENV_FILE="$HOME/Hunt/.env"
+ENV_FILE="$HOME/bug/.env"
 
 if [[ -f "$ENV_FILE" ]]; then
     export $(grep -v '^#' "$ENV_FILE" | xargs)
@@ -26,7 +26,7 @@ fi
 
 PLATFORM=$1
 PROGRAM=$2
-HUNT_DIR="$HOME/Hunt/$PLATFORM/$PROGRAM"
+HUNT_DIR="$HOME/bug/$PLATFORM/$PROGRAM"
 TOOLS_DIR="$HOME/Tools"
 SCOPE_FILE="$HUNT_DIR/scope.txt"
 
