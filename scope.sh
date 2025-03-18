@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Drian @xfdrian
-# scope.sh v0.07
+# scope.sh v0.08
 
 # Source the banner script
 source "$(dirname "$0")/banner.sh"
