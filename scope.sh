@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Drian @xfdrian
-# scope.sh v0.03
+# scope.sh v0.04
 
 # Source the banner script
 source "$(dirname "$0")/banner.sh"
@@ -10,31 +10,31 @@ banner
 
 # Check if required arguments are provided
 if [[ $# -lt 2 ]]; then
-    echo "Usage: $0 <platform> <program> [scope_file]"
+    echo "Usage: $0 --hackerone|--intigriti|--bugcrowd <program> [scope_file]"
     exit 1
 fi
 
-PLATFORM=$1
+# Validate platform argument
+case "$1" in
+    --hackerone)
+        PLATFORM="hackerone"
+        ;;
+    --intigriti)
+        PLATFORM="intigriti"
+        ;;
+    --bugcrowd)
+        PLATFORM="bugcrowd"
+        ;;
+    *)
+        echo "[ERROR] Invalid platform: '$1'"
+        echo "Valid options: --hackerone, --intigriti, --bugcrowd"
+        exit 1
+        ;;
+esac
+
 PROGRAM=$2
 HUNT_DIR="$HOME/bug/$PLATFORM/$PROGRAM"
 SCOPE_FILE="$HUNT_DIR/scope.txt"
-
-# Validate platform (only allow hackerone, intigriti, bugcrowd)
-VALID_PLATFORMS=("hackerone" "intigriti" "bugcrowd")
-IS_VALID_PLATFORM=false
-
-for VALID in "${VALID_PLATFORMS[@]}"; do
-    if [[ "$PLATFORM" == "$VALID" ]]; then
-        IS_VALID_PLATFORM=true
-        break
-    fi
-done
-
-if [[ "$IS_VALID_PLATFORM" == false ]]; then
-    echo "[ERROR] Invalid platform: '$PLATFORM'"
-    echo "Valid options: hackerone, intigriti, bugcrowd"
-    exit 1
-fi
 
 # Create required directories
 mkdir -p "$HUNT_DIR"
