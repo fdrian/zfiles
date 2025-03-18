@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Drian @xfdrian
-# scope.sh v0.01
+# scope.sh v0.02
 
 # Source the banner script
 source "$(dirname "$0")/banner.sh"
@@ -19,6 +19,14 @@ PROGRAM=$2
 HUNT_DIR="$HOME/bug/$PLATFORM/$PROGRAM"
 SCOPE_FILE="$HUNT_DIR/scope.txt"
 
+# Validate platform
+VALID_PLATFORMS=("hackerone" "intigriti" "bugcrowd")
+if [[ ! " ${VALID_PLATFORMS[@]} " =~ " ${PLATFORM} " ]]; then
+    echo "[ERROR] Invalid platform: $PLATFORM"
+    echo "Valid options: hackerone, intigriti, bugcrowd"
+    exit 1
+fi
+
 # Create required directories
 mkdir -p "$HUNT_DIR"
 
@@ -34,7 +42,7 @@ fi
 
 # Display the directory structure
 echo "[+] Directory structure:"
-tree "$HOME/bug/$PLATFORM"
+tree "$HOME/bug/$PLATFORM" || ls -R "$HOME/bug/$PLATFORM"
 
 # Display the scope file contents if it exists
 if [[ -s "$SCOPE_FILE" ]]; then
