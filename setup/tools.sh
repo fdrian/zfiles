@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Drian @xfdrian
-# tools.sh v0.01
+# tools.sh v0.02
 
 # Colors
 RED="\e[31m"
@@ -15,15 +15,18 @@ DIR="$HOME/Tools"
 LOG_FILE="$ZFILES/errors.log"
 exec 2>> "$LOG_FILE"  # Redirect stderr to log file
 
-# Ensure Go is installed
-if ! command -v go &> /dev/null; then
+# Ensure Go is installed and properly configured
+if ! command -v go &>/dev/null; then
     echo -e "${RED}[ERROR] Go is not installed. Run setup/golang.sh first.${RESET}"
     exit 1
 fi
 
 # Ensure Go binaries are in PATH
-export PATH=$HOME/go/bin:$PATH
-echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.zshrc
+export PATH=$HOME/.local/go/bin:/usr/local/go/bin:$PATH
+if ! grep -q "/usr/local/go/bin" ~/.zshrc; then
+    echo -e "${BLUE}[+] Adding Go binaries to PATH...${RESET}"
+    echo 'export PATH=$HOME/.local/go/bin:/usr/local/go/bin:$PATH' >> ~/.zshrc
+fi
 source ~/.zshrc
 
 # Ensure Tools directory exists
@@ -45,16 +48,23 @@ install_tool() {
         echo -e "${YELLOW}[+] $TOOL is already installed${RESET}"
     else
         echo -e "${BLUE}[+] Installing $TOOL${RESET}"
-        go install "$REPO@latest" 2>> "$LOG_FILE" || echo -e "${RED}[!] Failed to install $TOOL${RESET}"
+        go install "$REPO@latest" 2>> "$LOG_FILE" || {
+            echo -e "${RED}[!] Failed to install $TOOL${RESET}"
+            return 1
+        }
     fi
 }
 
 # Install Go-based tools from hacktools.txt
-while read -r TOOL REPO; do    
-    install_tool "$TOOL" "$REPO"
-done < "$TOOLS_LIST"
+if [[ -f "$TOOLS_LIST" ]]; then
+    while read -r TOOL REPO; do    
+        install_tool "$TOOL" "$REPO"
+    done < "$TOOLS_LIST"
+else
+    echo -e "${RED}[ERROR] Tool list file not found: $TOOLS_LIST${RESET}"
+fi
 
-# Install missing essential tools
+# Install essential tools
 echo -e "${BLUE}[+] Installing additional tools...${RESET}"
 ESSENTIAL_TOOLS=(
     "waybackurls github.com/tomnomnom/waybackurls"
@@ -102,7 +112,7 @@ declare -A REPOS=(
 for REPO_NAME in "${!REPOS[@]}"; do
     REPO_PATH="${REPOS[$REPO_NAME]}"
     echo -e "${BLUE}[+] Processing $REPO_NAME | github.com/$REPO_PATH${RESET}"
-    
+
     if [[ -d "$REPO_NAME" ]]; then
         cd "$REPO_NAME" || continue
         if git rev-parse --is-inside-work-tree &>/dev/null; then
@@ -135,7 +145,6 @@ for REPO_NAME in "${!REPOS[@]}"; do
     if [[ "$REPO_NAME" == *gf* ]]; then
         mkdir -p ~/.gf && cp -r "$REPO_NAME/examples"/*.json ~/.gf/
     fi
-
 done
 
 # Ensure necessary directories exist
