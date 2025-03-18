@@ -1,12 +1,16 @@
 #!/bin/bash
 # Author: Drian @xfdrian
-# scope.sh v0.08
+# scope.sh v0.09
 
-# Source the banner script
-source "$(dirname "$0")/banner.sh"
-
-clear
-banner
+# Source the banner script if it exists
+BANNER_FILE="$(dirname "$0")/banner.sh"
+if [[ -f "$BANNER_FILE" ]]; then
+    source "$BANNER_FILE"
+    clear
+    banner
+else
+    echo "[WARNING] Banner file not found: $BANNER_FILE"
+fi
 
 # Check if required arguments are provided
 if [[ $# -lt 2 ]]; then
@@ -43,13 +47,19 @@ mkdir -p "$HUNT_DIR"
 echo "[+] Directory created: $HUNT_DIR"
 
 # If a scope file is provided, copy it to the correct location
-if [[ -n "$3" && -f "$3" ]]; then
-    cp "$3" "$SCOPE_FILE"
-    echo "[+] Scope file copied to $SCOPE_FILE"
+if [[ -n "$3" ]]; then
+    if [[ -f "$3" ]]; then
+        cp "$3" "$SCOPE_FILE"
+        echo "[+] Scope file copied to $SCOPE_FILE"
+    else
+        echo "[ERROR] Scope file not found: $3"
+        exit 1
+    fi
 else
     # Create an empty scope file if none is provided
     touch "$SCOPE_FILE"
-    echo "[+] Scope file created: $SCOPE_FILE"
+    echo "[+] Empty scope file created: $SCOPE_FILE"
+    echo "[!] Please edit this file to add target domains."
 fi
 
 # Display the directory structure
